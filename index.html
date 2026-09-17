@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A hint-first math tutor for college students.">
+  <title>Proofline | College Math Tutor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">∑</div>
+        <div>
+          <p class="brand-name">Proofline</p>
+          <p class="brand-caption">Your math thinking partner</p>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <p class="eyebrow">Try a prompt</p>
+        <button class="example-prompt" data-prompt="How do I solve 2x² + 3x - 2 = 0?">
+          <span class="prompt-icon">×²</span>
+          <span><strong>Quadratics</strong><small>Factoring a polynomial</small></span>
+        </button>
+        <button class="example-prompt" data-prompt="Can you help me understand the derivative of sin(x²)?">
+          <span class="prompt-icon">d/dx</span>
+          <span><strong>Calculus</strong><small>Applying the chain rule</small></span>
+        </button>
+        <button class="example-prompt" data-prompt="How do I find the eigenvalues of a matrix?"><span class="prompt-icon">λ</span><span><strong>Linear algebra</strong><small>Finding eigenvalues</small></span></button>
+      </div>
+
+      <div class="sidebar-note">
+        <span class="note-dot"></span>
+        <p><strong>Hint-first mode</strong><br>Proofline gives you room to think before it reveals a solution.</p>
+      </div>
+      <p class="sidebar-footer">A small step is still progress.</p>
+    </aside>
+
+    <main class="chat-panel">
+      <header class="topbar">
+        <div class="tutor-status"><span class="status-dot"></span><span>Proofline tutor</span><span class="status-label">Online</span></div>
+        <button class="text-button" id="clearChat" type="button">Clear conversation</button>
+      </header>
+
+      <section class="conversation" id="conversation" aria-live="polite">
+        <div class="welcome-block">
+          <p class="eyebrow">College mathematics · guided practice</p>
+          <h1>Let’s work it<br><em>out together.</em></h1>
+          <p class="welcome-copy">Bring a problem, a proof, or a concept that feels slippery. I’ll ask the right question and offer one useful hint at a time.</p>
+        </div>
+
+        <div class="message-row tutor-row initial-message">
+          <div class="avatar tutor-avatar">∑</div>
+          <div class="message-content">
+            <span class="message-meta">PROOFLINE · JUST NOW</span>
+            <div class="message-bubble tutor-bubble">Hi! What are you working on? Share the problem exactly as you see it, and we’ll find the first foothold together.</div>
+            <div class="guided-actions">
+              <button class="chip-button" data-prompt="How do I solve 2x² + 3x - 2 = 0?" type="button">Solve an equation</button>
+              <button class="chip-button" data-prompt="Can you explain what a limit means?" type="button">Explain a concept</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="composer-area">
+        <div class="thinking-strip"><span>◎</span> I’ll give hints before solutions.</div>
+        <form class="composer" id="chatForm">
+          <label class="sr-only" for="messageInput">Ask a math question</label>
+          <textarea id="messageInput" rows="1" placeholder="Ask a question or paste a problem..." autocomplete="off"></textarea>
+          <button class="send-button" aria-label="Send question" type="submit">↗</button>
+        </form>
+        <p class="composer-footnote">Proofline can make mistakes. Use it to practice your reasoning, not replace it.</p>
+      </footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
