@@ -10,14 +10,27 @@ async function askTutor() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ messages: conversationHistory })
   });
+
   const responseBody = await response.text();
-  let data;
+  let data = {};
+
   try {
     data = JSON.parse(responseBody);
   } catch {
-    throw new Error('Start the local server before asking a question.');
+    if (!response.ok) {
+      throw new Error('The tutor server did not return a valid response.');
+    }
+    throw new Error('The tutor server returned an invalid response.');
   }
-  if (!response.ok) throw new Error(data.error || 'The tutor could not respond.');
+
+  if (!response.ok) {
+    throw new Error(data.error || 'The tutor could not respond.');
+  }
+
+  if (!data.text) {
+    throw new Error('The tutor returned no answer.');
+  }
+
   conversationHistory.push({ role: 'assistant', content: data.text });
   return data.text;
 }
@@ -55,7 +68,7 @@ async function addMessage(question) {
       }
     }, { once: true });
   } catch (error) {
-    tutorRow.querySelector('.tutor-bubble').textContent = 'I couldn’t connect to the tutor.';
+    tutorRow.querySelector('.tutor-bubble').textContent = 'The tutor is unavailable right now.';
     hint.textContent = error.message;
     nextButton.remove();
   }
