@@ -15,7 +15,7 @@ async function askTutor() {
   try {
     data = JSON.parse(responseBody);
   } catch {
-    throw new Error('Start Proofline with the local server before asking a question.');
+    throw new Error('Start the local server before asking a question.');
   }
   if (!response.ok) throw new Error(data.error || 'The tutor could not respond.');
   conversationHistory.push({ role: 'assistant', content: data.text });
@@ -25,15 +25,15 @@ async function askTutor() {
 async function addMessage(question) {
   const userRow = document.createElement('div');
   userRow.className = 'message-row user-row';
-  userRow.innerHTML = `<div class="avatar">you</div><div class="message-content"><span class="message-meta">YOU · JUST NOW</span><div class="message-bubble user-bubble"></div></div>`;
+  userRow.innerHTML = `<div class="avatar">you</div><div class="message-content"><div class="message-bubble user-bubble"></div></div>`;
   userRow.querySelector('.user-bubble').textContent = question;
   conversation.appendChild(userRow);
 
   conversationHistory.push({ role: 'user', content: question });
   const tutorRow = document.createElement('div');
   tutorRow.className = 'message-row tutor-row';
-  tutorRow.innerHTML = `<div class="avatar tutor-avatar">∑</div><div class="message-content"><span class="message-meta">PROOFLINE · JUST NOW</span><div class="message-bubble tutor-bubble">Thinking through your problem...</div><div class="hint-card"><p class="hint-label">Guided hint</p><p></p></div><div class="guided-actions"><button class="chip-button next-hint" type="button" disabled>Give me the next hint</button><button class="chip-button" type="button" data-prompt="I tried that step, can you check my reasoning?">Check my reasoning</button></div></div>`;
-  const hint = tutorRow.querySelector('.hint-card p:last-child');
+  tutorRow.innerHTML = `<div class="avatar tutor-avatar">∑</div><div class="message-content"><div class="message-bubble tutor-bubble">Thinking through your problem...</div><div class="hint-card"><p></p></div><div class="guided-actions"><button class="chip-button next-hint" type="button" disabled>Next hint</button><button class="chip-button" type="button" data-prompt="I tried that step, can you check my reasoning?">Check my reasoning</button></div></div>`;
+  const hint = tutorRow.querySelector('.hint-card p');
   const nextButton = tutorRow.querySelector('.next-hint');
   conversation.appendChild(tutorRow);
 

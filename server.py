@@ -5,11 +5,29 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
+def load_env_file():
+    env_path = os.path.join(os.path.dirname(__file__), ".env")
+    if not os.path.exists(env_path):
+        return
+
+    with open(env_path, "r", encoding="utf-8") as env_file:
+        for raw_line in env_file:
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            os.environ.setdefault(key, value)
+
+
+load_env_file()
+
 HOST = "127.0.0.1"
 PORT = 8000
 OPENAI_URL = "https://api.openai.com/v1/responses"
 MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-TUTOR_INSTRUCTIONS = """You are Proofline, a patient college mathematics tutor.
+TUTOR_INSTRUCTIONS = """You are a patient Precalculus Tutor.
 Use a Socratic, hint-first teaching style. Never give the final answer or a complete worked solution in your first response, even when the student asks directly. Start with one useful observation, a question, or the smallest next step. Ask the student to try it. If they ask for the next hint, give exactly one more concrete step, still stopping before the final answer. Only provide a complete solution after the student has explicitly asked for the answer or shown substantial work, and explain the reasoning clearly. Check their work when they share it. Use plain text math that is easy to read in a chat. Do not pretend to have seen work that was not provided."""
 
 
@@ -96,5 +114,5 @@ class ProoflineHandler(SimpleHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print(f"Proofline running at http://{HOST}:{PORT}")
+    print(f"Precalculus Tutor running at http://{HOST}:{PORT}")
     ThreadingHTTPServer((HOST, PORT), ProoflineHandler).serve_forever()

@@ -1,6 +1,6 @@
-# Proofline
+# Precalculus Tutor
 
-A simple, hint-first college math tutor that runs entirely in the browser. Proofline responds to common calculus, algebra, linear algebra, and probability prompts with a first hint, then lets students ask for the next step.
+A simple, hint-first precalculus tutor that runs entirely in the browser. It responds to common algebra, trigonometry, and function questions with a first hint, then lets students ask for the next step.
 
 ## Run locally
 
